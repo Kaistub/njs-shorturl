@@ -8,6 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const port = configService.get<number>( 'PORT' ) || 3001;
+
+  app.enableCors();
+  app.setGlobalPrefix('v1');
+
+
   await app.listen( port );
   logger.log( `Application listening on port ${ port }` );
 }

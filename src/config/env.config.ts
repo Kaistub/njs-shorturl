@@ -9,5 +9,9 @@ export const EnvConfig = () => ({
         PG_DB: process.env.PG_DB || 'postgres',
         PG_AUTOLOAD: process.env.PG_AUTOLOAD === 'true' || true,
         PG_SYNC: process.env.PG_SYNC === 'true' || true,
+    },
+    VARIABLES: {
+        URL_LENGTH: +process.env.URL_LENGTH || 5,
+        URL_BASE: process.env.URL_BASE || 'http://localhost:6000/',
     }
 });
