@@ -1,6 +1,7 @@
 export const EnvConfig = () => ({
     PORT: +process.env.PORT || 6000,
     ENV: String(process.env.NODE_ENV).toLowerCase() || 'dev',
+    API_PREFIX: process.env.API_PREFIX || 'v1',
     PG_DB: {
         PG_HOST: process.env.PG_HOST || 'localhost',
         PG_PORT: +process.env.PG_PORT || 5432,
@@ -12,6 +13,6 @@ export const EnvConfig = () => ({
     },
     VARIABLES: {
         URL_LENGTH: +process.env.URL_LENGTH || 5,
-        URL_BASE: process.env.URL_BASE || 'http://localhost:6000/',
+        CUSTOM_URL_BASE: process.env.URL_BASE || '',
     }
 });

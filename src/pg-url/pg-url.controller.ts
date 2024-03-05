@@ -1,20 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Redirect } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Redirect, Req } from '@nestjs/common';
 import { PgUrlService } from './pg-url.service';
 import { CreatePgUrlDto } from './dto/create-pg-url.dto';
+import { Request } from 'express';
 
-@Controller('pg-url')
+const CONTROLLER_PREFIX = 'pg-url';
+
+@Controller( CONTROLLER_PREFIX )
 export class PgUrlController {
   constructor(private readonly pgUrlService: PgUrlService) {}
 
   @Post('shorten')
-  create(@Body() createPgUrlDto: CreatePgUrlDto) {
-    return this.pgUrlService.shortenUrl( createPgUrlDto );
+  create(@Body() createPgUrlDto: CreatePgUrlDto, @Req() request: Request ) {
+    return this.pgUrlService.shortenUrl( createPgUrlDto, request, CONTROLLER_PREFIX );
   }
 
-  @Get(':url')
+  @Get(':id')
   @Redirect()
-  async findOne(@Param('url') url: string) {
-    const originalUrl = await this.pgUrlService.getOriginal( url );
+  async findOne(@Param('id') id: string) {
+    const originalUrl = await this.pgUrlService.getOriginal( id );
     return { url: originalUrl };
   }
 
