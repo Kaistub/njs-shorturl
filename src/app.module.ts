@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvConfig } from './config/env.config';
 import { getTypeOrmConfig } from './config/typeorm.config';
 import { PgUrlModule } from './pg-url/pg-url.module';
+import { MgUrlModule } from './mg-url/mg-url.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PgUrlModule } from './pg-url/pg-url.module';
       inject: [ ConfigService ],
     }),
     PgUrlModule,
+    MgUrlModule,
   ],
   controllers: [AppController],
   providers: [AppService],
